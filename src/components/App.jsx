@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
-import ClipLoader from 'react-spinners/ClipLoader';
+import Spinner from './Spinner/Spinner.jsx';
 import Header from './Header/Header.jsx';
 import Form from './Form/Form.jsx';
 import { gatListOfAvailableCurrencies } from '../api/api';
@@ -31,11 +31,11 @@ const App = () => {
     <Container>
       <Content>
         {isLoading
-          ? <ClipLoader color='#11B3FE' size={100}/>
+          ? <Spinner />
           : (
             <>
               <Header />
-              <Form options={getOptions(data)} />
+              <Form selectOptions={getOptions(data)} />
             </>
           )
         }

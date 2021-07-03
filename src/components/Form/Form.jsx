@@ -23,14 +23,14 @@ const BottomRow = styled.div`
   align-items: flex-end;
 `;
 
-const Form = ({ options }) => (
+const Form = ({ selectOptions }) => (
   <form>
     <InputsRow>
-      <InputWithSelect options={options} />
+      <InputWithSelect options={selectOptions} />
       <Swap>
         <SwapIcon />
       </Swap>
-      <InputWithSelect options={options} />
+      <InputWithSelect options={selectOptions} />
     </InputsRow>
     <BottomRow>
       <AddressInput />
