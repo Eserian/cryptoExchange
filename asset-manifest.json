@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/cryptoExchange/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/cryptoExchange/static/js/main.e9c5f87b.chunk.js",
-    "main.js.map": "/cryptoExchange/static/js/main.e9c5f87b.chunk.js.map",
-    "runtime-main.js": "/cryptoExchange/static/js/runtime-main.9ea1a0fb.js",
-    "runtime-main.js.map": "/cryptoExchange/static/js/runtime-main.9ea1a0fb.js.map",
-    "static/js/2.16c7d208.chunk.js": "/cryptoExchange/static/js/2.16c7d208.chunk.js",
-    "static/js/2.16c7d208.chunk.js.map": "/cryptoExchange/static/js/2.16c7d208.chunk.js.map",
-    "static/js/3.1e418220.chunk.js": "/cryptoExchange/static/js/3.1e418220.chunk.js",
-    "static/js/3.1e418220.chunk.js.map": "/cryptoExchange/static/js/3.1e418220.chunk.js.map",
+    "main.css": "/cryptoExchange/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/cryptoExchange/static/js/main.412cfcfa.chunk.js",
+    "main.js.map": "/cryptoExchange/static/js/main.412cfcfa.chunk.js.map",
+    "runtime-main.js": "/cryptoExchange/static/js/runtime-main.bcc20673.js",
+    "runtime-main.js.map": "/cryptoExchange/static/js/runtime-main.bcc20673.js.map",
+    "static/js/2.13323ce5.chunk.js": "/cryptoExchange/static/js/2.13323ce5.chunk.js",
+    "static/js/2.13323ce5.chunk.js.map": "/cryptoExchange/static/js/2.13323ce5.chunk.js.map",
+    "static/js/3.078bb978.chunk.js": "/cryptoExchange/static/js/3.078bb978.chunk.js",
+    "static/js/3.078bb978.chunk.js.map": "/cryptoExchange/static/js/3.078bb978.chunk.js.map",
     "index.html": "/cryptoExchange/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/cryptoExchange/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.16c7d208.chunk.js.LICENSE.txt": "/cryptoExchange/static/js/2.16c7d208.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/cryptoExchange/static/media/logo.6ce24c58.svg"
+    "static/css/main.6dea0f05.chunk.css.map": "/cryptoExchange/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.13323ce5.chunk.js.LICENSE.txt": "/cryptoExchange/static/js/2.13323ce5.chunk.js.LICENSE.txt",
+    "static/media/swap.120f0b33.svg": "/cryptoExchange/static/media/swap.120f0b33.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9ea1a0fb.js",
-    "static/js/2.16c7d208.chunk.js",
-    "static/css/main.9d5b29c0.chunk.css",
-    "static/js/main.e9c5f87b.chunk.js"
+    "static/js/runtime-main.bcc20673.js",
+    "static/js/2.13323ce5.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.412cfcfa.chunk.js"
   ]
 }
