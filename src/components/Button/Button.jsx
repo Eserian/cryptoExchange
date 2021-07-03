@@ -9,6 +9,11 @@ const Button = styled.button`
   height: 50px;
   padding: 15px 60px;
   margin-left: 30px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+  line-height: 120%;
 
   &:hover {
     background: #0095E0;
