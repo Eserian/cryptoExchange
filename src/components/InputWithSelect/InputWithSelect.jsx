@@ -33,7 +33,7 @@ const Separator = styled.span`
 `;
 
 const Input = styled.input`
-  flex-grow: 3;
+  flex-grow: 1;
   background: #F4F4F4;
   border: none;
   outline:none;

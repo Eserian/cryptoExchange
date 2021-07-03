@@ -11,15 +11,14 @@ const OptionItemBox = styled.div`
 `;
 
 const Image = styled.span`
-  display: inline-block;
   width: 20px;
   height: 20px;
-  background-size: cover;
-  margin-right: 10px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 8px;
   ${(props) => css`
     background-image: url(${props.src});
   `}
-  filter: invert(57%) sepia(33%) saturate(2011%) hue-rotate(168deg) brightness(96%) contrast(109%);
 `;
 
 const Name = styled.span`

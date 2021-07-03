@@ -1,8 +1,11 @@
 import React from 'react';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import Header from './Header/Header.jsx';
 import Form from './Form/Form.jsx';
+import { gatListOfAvailableCurrencies } from '../api/api';
 
+/*
 const testData = [
   {
     ticker: 'btc',
@@ -35,8 +38,9 @@ const testData = [
     supportsFixedRate: true,
   },
 ];
+*/
 
-const options = testData.map((item) => (
+const getOptions = (data) => data.map((item) => (
   { value: item, label: { ticker: item.ticker, name: item.name }, icon: item.image }
 ));
 
@@ -54,13 +58,19 @@ const Content = styled.div`
   margin: 0 auto;
 `;
 
-const App = () => (
-  <Container>
-    <Content>
-      <Header />
-      <Form options={options} />
-    </Content>
-  </Container>
-);
+const App = () => {
+  const { isLoading, data } = useQuery('repoData', gatListOfAvailableCurrencies);
+
+  return isLoading
+    ? 'Loading'
+    : (
+      <Container>
+        <Content>
+          <Header />
+          <Form options={getOptions(data)} />
+        </Content>
+      </Container>
+    );
+};
 
 export default App;

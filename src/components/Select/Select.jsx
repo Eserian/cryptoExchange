@@ -13,6 +13,7 @@ const Select = (props) => (
       SingleValue: CustomSingleValue,
       DropdownIndicator: CustomDropdownIndicator,
     }}
+    maxMenuHeight={160}
   />
 );
 
