@@ -1,44 +1,10 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
+import ClipLoader from 'react-spinners/ClipLoader';
 import Header from './Header/Header.jsx';
 import Form from './Form/Form.jsx';
 import { gatListOfAvailableCurrencies } from '../api/api';
-
-/*
-const testData = [
-  {
-    ticker: 'btc',
-    name: 'Bitcoin',
-    image: 'https://changenow.io/images/coins/btc.svg',
-    hasExternalId: false,
-    isFiat: false,
-    featured: true,
-    isStable: false,
-    supportsFixedRate: true,
-  },
-  {
-    ticker: 'eth',
-    name: 'Ethereum',
-    image: 'https://changenow.io/images/coins/eth.svg',
-    hasExternalId: false,
-    isFiat: false,
-    featured: true,
-    isStable: false,
-    supportsFixedRate: true,
-  },
-  {
-    ticker: 'xrp',
-    name: 'Ripple',
-    image: 'https://changenow.io/images/coins/xrp.svg',
-    hasExternalId: true,
-    isFiat: false,
-    featured: false,
-    isStable: false,
-    supportsFixedRate: true,
-  },
-];
-*/
 
 const getOptions = (data) => data.map((item) => (
   { value: item, label: { ticker: item.ticker, name: item.name }, icon: item.image }
@@ -59,18 +25,23 @@ const Content = styled.div`
 `;
 
 const App = () => {
-  const { isLoading, data } = useQuery('repoData', gatListOfAvailableCurrencies);
+  const { isLoading, data } = useQuery('currenciesData', gatListOfAvailableCurrencies);
 
-  return isLoading
-    ? 'Loading'
-    : (
-      <Container>
-        <Content>
-          <Header />
-          <Form options={getOptions(data)} />
-        </Content>
-      </Container>
-    );
+  return (
+    <Container>
+      <Content>
+        {isLoading
+          ? <ClipLoader color='#11B3FE' size={100}/>
+          : (
+            <>
+              <Header />
+              <Form options={getOptions(data)} />
+            </>
+          )
+        }
+      </Content>
+    </Container>
+  );
 };
 
 export default App;
