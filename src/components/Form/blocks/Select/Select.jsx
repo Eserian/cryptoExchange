@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ReactSelect from 'react-select';
 import customStyles from './customStyles';
@@ -7,7 +8,7 @@ const Select = (props) => (
   <ReactSelect
     {...props}
     styles={customStyles}
-    placeholder="Search"
+    placeholder={props.isMenuOpen ? 'Search' : 'Select'}
     components={{
       Option: CustomOption,
       SingleValue: CustomSingleValue,

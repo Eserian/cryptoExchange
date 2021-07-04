@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useFormikContext } from 'formik';
@@ -69,14 +70,20 @@ const InputWithSelect = ({ options, type }) => {
     setIsMenuOpen(false);
   };
 
+  const isDisabledInput = type === 'from' && ((!values.from || !values.to) || (values.from === values.to));
+  const isReadOnlyInput = type === 'to';
+  const inputName = type === 'from' ? 'amountFrom' : 'amountTo';
+  const inputValue = type === 'from' ? values.amountFrom : values.amountTo;
+
   return (
     <InputGroup isMenuOpen={isMenuOpen}>
       <Input
         isHide={isInputHide}
-        readOnly={type === 'to'}
+        disabled={isDisabledInput}
+        readOnly={isReadOnlyInput}
         onChange={handleChange}
-        name={type === 'from' ? 'amountFrom' : 'amountTo'}
-        value={type === 'from' ? values.amountFrom : values.amountTo}
+        name={inputName}
+        value={inputValue}
       />
       <Separator isHide={isInputHide} />
       <Select
@@ -84,6 +91,7 @@ const InputWithSelect = ({ options, type }) => {
         options={options}
         onMenuOpen={handleOpenMenu}
         onMenuClose={handleCloseMenu}
+        isMenuOpen={isMenuOpen}
       />
     </InputGroup>
   );

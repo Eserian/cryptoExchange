@@ -2,8 +2,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState, useCallback } from 'react';
-import { useFormikContext } from 'formik';
-import styled from 'styled-components';
+import { useFormikContext, ErrorMessage } from 'formik';
+import styled, { css } from 'styled-components';
 import { debounce } from 'lodash';
 import InputWithSelect from './blocks/InputWithSelect/InputWithSelect.jsx';
 import Button from './blocks/Button/Button.jsx';
@@ -21,38 +21,65 @@ const Swap = styled.div`
 
 const InputsRow = styled.div`
   display: flex;
-  margin-bottom: 20px;
 `;
 
 const BottomRow = styled.div`
+  margin-top: 20px;
   display: flex;
   align-items: flex-end;
 `;
 
+const Error = styled.div`
+  width: 100%;
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 23px;
+  color: #E03F3F;
+  ${(props) => props.side && css`
+    text-align: ${props.side};
+  `}
+`;
+
+const Errors = styled.div`
+  display: flex;
+`;
+
 const Form = ({ selectOptions }) => {
-  const { handleSubmit, values, setFieldValue } = useFormikContext();
+  const {
+    handleSubmit,
+    values,
+    setFieldValue,
+  } = useFormikContext();
   const [minimalEchangeAmount, setMinimalExchangeAmount] = useState(0);
+  const [error, setError] = useState(null);
+
+  const debouncedGetEstimatedExchangeAmount = useCallback(
+    debounce(async (amount, pair) => {
+      try {
+        const { estimatedAmount } = await getEstimatedExchangeAmount(amount, pair);
+        setFieldValue('amountTo', estimatedAmount);
+      } catch (e) {
+        setError(e.response.data.message);
+      }
+    }, 500),
+    [],
+  );
 
   useEffect(() => {
     (async () => {
       if (!values.from || !values.to) {
         return;
       }
-
-      const pair = getPair(values.from, values.to);
-      const { minAmount } = await getMinimalExchangeAmount(pair);
-      setMinimalExchangeAmount(minAmount);
-      setFieldValue('amountFrom', minAmount);
+      try {
+        const pair = getPair(values.from, values.to);
+        const { minAmount } = await getMinimalExchangeAmount(pair);
+        setMinimalExchangeAmount(minAmount);
+        setFieldValue('amountFrom', minAmount);
+      } catch (e) {
+        setError(e.response.data.message);
+      }
     })();
   }, [values.from, values.to]);
-
-  const debouncedGetEstimatedExchangeAmount = useCallback(
-    debounce(async (amount, pair) => {
-      const { estimatedAmount } = await getEstimatedExchangeAmount(amount, pair);
-      setFieldValue('amountTo', estimatedAmount);
-    }, 1000),
-    [],
-  );
 
   useEffect(() => {
     (async () => {
@@ -61,9 +88,10 @@ const Form = ({ selectOptions }) => {
       }
       if (values.amountFrom < minimalEchangeAmount) {
         setFieldValue('amountTo', '-');
+        setError('Amount is less than minimum');
         return;
       }
-
+      setError(null);
       const pair = getPair(values.from, values.to);
       await debouncedGetEstimatedExchangeAmount(values.amountFrom, pair);
     })();
@@ -78,10 +106,22 @@ const Form = ({ selectOptions }) => {
         </Swap>
         <InputWithSelect options={selectOptions} type='to' />
       </InputsRow>
+      <Errors>
+        <ErrorMessage component={Error} name='from' side='left' />
+        <ErrorMessage component={Error} name='to' side='right' />
+      </Errors>
       <BottomRow>
         <AddressInput />
-        <Button type='submit'>Exchange</Button>
+        <Button type='submit' disabled={error}>Exchange</Button>
       </BottomRow>
+      <Errors>
+        <ErrorMessage component={Error} side='left' name='address' />
+        {error && (
+          <Error side='right'>
+            {error && error}
+          </Error>
+        )}
+      </Errors>
     </form>
   );
 };
