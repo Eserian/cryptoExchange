@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Button = styled.button`
   background: #11B3FE;
@@ -18,6 +18,12 @@ const Button = styled.button`
   &:hover {
     background: #0095E0;
   }
+  ${(props) => props.disabled && css`
+    background: gray;
+    &:hover {
+      background: gray;
+    }
+  `}
 `;
 
 export default Button;

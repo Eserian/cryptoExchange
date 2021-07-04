@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import ReactSelect from 'react-select';
 import customStyles from './customStyles';

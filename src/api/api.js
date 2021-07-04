@@ -8,7 +8,7 @@ const fetchData = async (url) => {
   return data;
 };
 
-export const gatListOfAvailableCurrencies = async () => {
+export const gatListOfAvailableCurrencies = () => {
   const url = `${API_URL}/currencies?active=true&fixedRate=true`;
   return fetchData(url);
 };

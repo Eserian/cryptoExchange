@@ -36,8 +36,9 @@ const AddressInput = () => {
 
   return (
     <InputBox>
-      <Label>Your Ethereum address</Label>
+      <Label htmlFor='address'>Your Ethereum address</Label>
       <Input
+        id='address'
         name='address'
         onChange={handleChange}
         value={values.name}

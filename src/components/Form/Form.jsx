@@ -1,15 +1,11 @@
-/* eslint-disable max-len */
-/* eslint-disable no-alert */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useFormikContext, ErrorMessage } from 'formik';
 import styled, { css } from 'styled-components';
-import { debounce } from 'lodash';
+import { debounce, isEmpty } from 'lodash';
 import InputWithSelect from './blocks/InputWithSelect/InputWithSelect.jsx';
 import Button from './blocks/Button/Button.jsx';
 import AddressInput from './blocks/AddressInput/AddressInput.jsx';
 import { ReactComponent as SwapIcon } from '../../images/swap.svg';
-import { getMinimalExchangeAmount, getEstimatedExchangeAmount } from '../../api/api';
 import getPair from '../../utils/getPair';
 
 const Swap = styled.div`
@@ -44,11 +40,12 @@ const Errors = styled.div`
   display: flex;
 `;
 
-const Form = ({ selectOptions }) => {
+const Form = ({ selectOptions, getMinimalExchangeAmount, getEstimatedExchangeAmount }) => {
   const {
     handleSubmit,
     values,
     setFieldValue,
+    errors,
   } = useFormikContext();
   const [minimalEchangeAmount, setMinimalExchangeAmount] = useState(0);
   const [error, setError] = useState(null);
@@ -59,7 +56,11 @@ const Form = ({ selectOptions }) => {
         const { estimatedAmount } = await getEstimatedExchangeAmount(amount, pair);
         setFieldValue('amountTo', estimatedAmount);
       } catch (e) {
-        setError(e.response.data.message);
+        if (e.response.data.error === 'pair_is_inactive') {
+          setError('This pair is disabled now');
+        } else {
+          setError(e.response.data.message);
+        }
       }
     }, 500),
     [],
@@ -76,7 +77,11 @@ const Form = ({ selectOptions }) => {
         setMinimalExchangeAmount(minAmount);
         setFieldValue('amountFrom', minAmount);
       } catch (e) {
-        setError(e.response.data.message);
+        if (e.response.data.error === 'pair_is_inactive') {
+          setError('This pair is disabled now');
+        } else {
+          setError(e.response.data.message);
+        }
       }
     })();
   }, [values.from, values.to]);
@@ -112,7 +117,8 @@ const Form = ({ selectOptions }) => {
       </Errors>
       <BottomRow>
         <AddressInput />
-        <Button type='submit' disabled={error}>Exchange</Button>
+        <Button type='submit' disabled={error || !isEmpty(errors)}>Exchange</Button>
+        {console.log(errors)}
       </BottomRow>
       <Errors>
         <ErrorMessage component={Error} side='left' name='address' />

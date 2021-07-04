@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import React from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
@@ -7,7 +6,7 @@ import { Formik } from 'formik';
 import Spinner from './Spinner/Spinner.jsx';
 import Header from './Header/Header.jsx';
 import Form from './Form/Form.jsx';
-import { gatListOfAvailableCurrencies } from '../api/api';
+import { gatListOfAvailableCurrencies, getMinimalExchangeAmount, getEstimatedExchangeAmount } from '../api/api';
 
 const getOptions = (data) => data.map((item) => (
   { value: item.ticker, label: { ticker: item.ticker, name: item.name }, icon: item.image }
@@ -52,7 +51,11 @@ const App = () => {
           alert(JSON.stringify(values, null, 2));
         }}
       >
-        <Form selectOptions={getOptions(data)} />
+        <Form
+          selectOptions={getOptions(data)}
+          getEstimatedExchangeAmount={getEstimatedExchangeAmount}
+          getMinimalExchangeAmount={getMinimalExchangeAmount}
+        />
       </Formik>
     </>
   );
