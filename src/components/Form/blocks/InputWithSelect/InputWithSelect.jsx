@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { useFormikContext } from 'formik';
 import styled, { css } from 'styled-components';
 import Select from '../Select/Select.jsx';
 
@@ -33,19 +34,30 @@ const Separator = styled.span`
 `;
 
 const Input = styled.input`
-  flex-grow: 1;
+  flex-grow: 1.5;
   background: #F4F4F4;
   border: none;
   outline:none;
   box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+  color: #282828;
+  padding-left: 10px;
   ${(props) => props.isHide && css`
     display: none;
   `}
 `;
 
-const InputWithSelect = (props) => {
+const InputWithSelect = ({ options, type }) => {
+  const { setFieldValue, handleChange, values } = useFormikContext();
   const [isInputHide, setIsInputHide] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleSelectChange = ({ value }) => {
+    setFieldValue(type, value);
+  };
 
   const handleOpenMenu = () => {
     setIsInputHide(true);
@@ -59,11 +71,17 @@ const InputWithSelect = (props) => {
 
   return (
     <InputGroup isMenuOpen={isMenuOpen}>
-      <Input {...props} isHide={isInputHide} />
+      <Input
+        isHide={isInputHide}
+        readOnly={type === 'to'}
+        onChange={handleChange}
+        name={type === 'from' ? 'amountFrom' : 'amountTo'}
+        value={type === 'from' ? values.amountFrom : values.amountTo}
+      />
       <Separator isHide={isInputHide} />
       <Select
-        {...props}
-        options={props.options}
+        onChange={handleSelectChange}
+        options={options}
         onMenuOpen={handleOpenMenu}
         onMenuClose={handleCloseMenu}
       />

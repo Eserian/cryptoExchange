@@ -27,6 +27,7 @@ const customStyles = {
     ...styles,
     background: isFocused ? '#EAF1F7' : '#F4F4F4',
     color: isSelected ? 'inherit' : styles.color,
+    cursor: 'pointer',
   }),
 };
 

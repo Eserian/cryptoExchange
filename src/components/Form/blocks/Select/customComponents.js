@@ -28,6 +28,16 @@ const Name = styled.span`
   line-height: 23px;
 `;
 
+const Ticker = styled.span`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+  ${(props) => props.data.length > 4 && css`
+    font-size: 10px;
+  `}
+`;
+
 const SelectedItem = styled.div`
   display: flex;
   align-items: center;
@@ -62,9 +72,9 @@ export const CustomSingleValue = (props) => (
       : (
         <SelectedItem>
           <Image src={props.data.icon} />
-          <span>
+          <Ticker data={props.data.label.ticker}>
             {props.data.label.ticker.toUpperCase()}
-          </span>
+          </Ticker>
         </SelectedItem>
       )
     }

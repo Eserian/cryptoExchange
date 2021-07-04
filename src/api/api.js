@@ -13,12 +13,12 @@ export const gatListOfAvailableCurrencies = async () => {
   return fetchData(url);
 };
 
-export const getMinimalExchangeAmount = (fromToPair) => () => {
-  const url = `${API_URL}/min-amount/:${fromToPair}?api_key=${API_KEY}`;
+export const getMinimalExchangeAmount = (fromToPair) => {
+  const url = `${API_URL}/min-amount/${fromToPair}?api_key=${API_KEY}`;
   return fetchData(url);
 };
 
-export const getEstimatedExchangeAmount = (amount, fromToPair) => () => {
-  const url = `${API_URL}/exchange-amount/:${amount}/:${fromToPair}?api_key=${API_KEY}`;
+export const getEstimatedExchangeAmount = (amount, fromToPair) => {
+  const url = `${API_URL}/exchange-amount/${amount}/${fromToPair}?api_key=${API_KEY}`;
   return fetchData(url);
 };

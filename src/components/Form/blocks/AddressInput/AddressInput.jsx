@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useFormikContext } from 'formik';
 
 const InputBox = styled.div`
   display: flex;
@@ -20,13 +21,27 @@ const Input = styled.input`
   height: 50px;
   border-radius: 5px;
   box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+  color: #282828;
+  outline: none;
 `;
 
-const AddressInput = (props) => (
-  <InputBox>
-    <Label>Your Ethereum address</Label>
-    <Input {...props}/>
-  </InputBox>
-);
+const AddressInput = () => {
+  const { handleChange, values } = useFormikContext();
+
+  return (
+    <InputBox>
+      <Label>Your Ethereum address</Label>
+      <Input
+        name='address'
+        onChange={handleChange}
+        value={values.name}
+      />
+    </InputBox>
+  );
+};
 
 export default AddressInput;

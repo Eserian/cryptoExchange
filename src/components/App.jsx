@@ -1,13 +1,15 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
+import { Formik } from 'formik';
 import Spinner from './Spinner/Spinner.jsx';
 import Header from './Header/Header.jsx';
 import Form from './Form/Form.jsx';
 import { gatListOfAvailableCurrencies } from '../api/api';
 
 const getOptions = (data) => data.map((item) => (
-  { value: item, label: { ticker: item.ticker, name: item.name }, icon: item.image }
+  { value: item.ticker, label: { ticker: item.ticker, name: item.name }, icon: item.image }
 ));
 
 const Container = styled.div`
@@ -27,18 +29,30 @@ const Content = styled.div`
 const App = () => {
   const { isLoading, data } = useQuery('currenciesData', gatListOfAvailableCurrencies);
 
+  const MainContent = () => (
+    <>
+      <Header />
+      <Formik
+        initialValues={{
+          from: '',
+          to: '',
+          address: '',
+          amountFrom: '',
+          amountTo: '',
+        }}
+        onSubmit={(values) => {
+          alert(JSON.stringify(values, null, 2));
+        }}
+      >
+        <Form selectOptions={getOptions(data)} />
+      </Formik>
+    </>
+  );
+
   return (
     <Container>
       <Content>
-        {isLoading
-          ? <Spinner />
-          : (
-            <>
-              <Header />
-              <Form selectOptions={getOptions(data)} />
-            </>
-          )
-        }
+        {isLoading ? <Spinner /> : <MainContent />}
       </Content>
     </Container>
   );

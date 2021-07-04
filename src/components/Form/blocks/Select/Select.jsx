@@ -14,6 +14,7 @@ const Select = (props) => (
       DropdownIndicator: CustomDropdownIndicator,
     }}
     maxMenuHeight={160}
+    isSearchable
   />
 );
 
