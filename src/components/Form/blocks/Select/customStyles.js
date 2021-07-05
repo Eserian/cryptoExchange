@@ -8,6 +8,7 @@ const customStyles = {
     background: '#F4F4F4',
     border: 'none',
     boxShadow: 'none',
+    height: '48px',
   }),
   menu: (styles) => ({
     ...styles,

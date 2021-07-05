@@ -13,6 +13,7 @@ const InputGroup = styled.div`
   border: 1px solid #E3EBEF;
   border-radius: 5px;
   width: 400px;
+  height: 50px;
 
   ${(props) => props.isMenuOpen && css`
     border-top: 1px solid #C1D9E6;
