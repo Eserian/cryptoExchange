@@ -6,7 +6,7 @@ import InputWithSelect from '../InputWithSelect/InputWithSelect.jsx';
 import Button from '../Button/Button.jsx';
 import AddressInput from '../AddressInput/AddressInput.jsx';
 import { ReactComponent as SwapIcon } from '../../../../images/swap.svg';
-import getPair from '../../../../utils/getPair';
+import { getPair } from '../../../../utils/utils';
 
 const Swap = styled.div`
   display: flex;

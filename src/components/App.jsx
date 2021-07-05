@@ -5,10 +5,7 @@ import Spinner from './Spinner/Spinner.jsx';
 import Header from './Header/Header.jsx';
 import Form from './Form/Form.jsx';
 import { gatListOfAvailableCurrencies, getMinimalExchangeAmount, getEstimatedExchangeAmount } from '../api/api';
-
-const getOptions = (data) => data.map((item) => (
-  { value: item.ticker, label: { ticker: item.ticker, name: item.name }, icon: item.image }
-));
+import { getOptions } from '../utils/utils';
 
 const Container = styled.div`
   font-family: Arial;
