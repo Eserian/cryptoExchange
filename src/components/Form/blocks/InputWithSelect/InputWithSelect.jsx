@@ -84,6 +84,7 @@ const InputWithSelect = ({ options, type }) => {
         onChange={handleChange}
         name={inputName}
         value={inputValue}
+        data-testid={inputName}
       />
       <Separator isHide={isInputHide} />
       <Select

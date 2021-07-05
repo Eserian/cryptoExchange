@@ -1,5 +1,5 @@
 import getPair from '../utils/getPair';
 
-it('shouldGetPair', () => {
+test('shouldGetPair', () => {
   expect(getPair('foo', 'bar')).toEqual('foo_bar');
 });

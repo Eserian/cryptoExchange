@@ -1,8 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
-import * as yup from 'yup';
-import { Formik } from 'formik';
 import Spinner from './Spinner/Spinner.jsx';
 import Header from './Header/Header.jsx';
 import Form from './Form/Form.jsx';
@@ -26,19 +24,13 @@ const Content = styled.div`
   margin: 0 auto;
 `;
 
-const schema = yup.object().shape({
-  from: yup.string().required('Select currency!'),
-  to: yup.string().required('Select currency!'),
-  address: yup.string().required('Address is required'),
-});
-
 const App = () => {
   const { isLoading, data } = useQuery('currenciesData', gatListOfAvailableCurrencies);
 
   const MainContent = () => (
     <>
       <Header />
-      <Formik
+      <Form
         initialValues={{
           from: '',
           to: '',
@@ -46,17 +38,11 @@ const App = () => {
           amountFrom: '',
           amountTo: '',
         }}
-        validationSchema={schema}
-        onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
-        }}
-      >
-        <Form
-          selectOptions={getOptions(data)}
-          getEstimatedExchangeAmount={getEstimatedExchangeAmount}
-          getMinimalExchangeAmount={getMinimalExchangeAmount}
-        />
-      </Formik>
+        options={getOptions(data)}
+        getEstimatedExchangeAmount={getEstimatedExchangeAmount}
+        getMinimalExchangeAmount={getMinimalExchangeAmount}
+        onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+      />
     </>
   );
 

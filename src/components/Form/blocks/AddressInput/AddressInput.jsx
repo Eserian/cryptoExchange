@@ -42,6 +42,7 @@ const AddressInput = () => {
         name='address'
         onChange={handleChange}
         value={values.name}
+        data-testid='address'
       />
     </InputBox>
   );
